@@ -36,7 +36,7 @@ def predict():
 	predict = model.predict(final_features)
 	
 	output = predict[0]
-	if(output == 1) :
+	if(output) :
 		PREDICTION ="Placed"
 	else :
 		PREDICTION = "Not Placed"
