@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <SCRIPT language=Javascript>
+    <!--
+    function check(e, value) {
+      //Check Charater
+      var unicode = e.charCode ? e.charCode : e.keyCode;
+      if (value.indexOf(".") != -1)
+        if (unicode == 46) return false;
+      if (unicode != 8)
+        if ((unicode < 48 || unicode > 57) && unicode != 46) return false;
+    }
+    //-->
+  </SCRIPT>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* style the container */
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px 0 30px 0;
+} 
+
+/* style inputs and link buttons */
+input,
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+
+/* style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Two-column layout */
+.col {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 490px;
+}
+
+/* text inside the vertical line */
+.vl-innertext {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.hide-md-lg {
+  display: none;
+}
+
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  background-color: #666;
+  border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .hide-md-lg {
+    display: block;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <form action="{{url_for('predict')}}" method="post">
+    <div class="row">
+      <marquee class="bottom-container"><h2>STUDENT PLACEMENT PREDICTION</h2></marquee>
+      <div class="vl">
+        <span class="vl-innertext"></span>
+      </div>
+
+      <div class="col">
+	  <p><b>In this project,We trained a SVM model to predict the whether student can be placed or not in placement . Based on the predction student can prepare himself/herself accordingly .</p></b>
+	  <h3>Instructions for Input Features</h3>
+      <ul>
+			<li> GENDER TYPE 1 FOR MALE AND O FOR FEMALE</li>
+			<li>SSC PERCENTAGE (0 TO 100)</li>
+			<li>SSC BOARD (1 FOR STATE BOARD 0 FOR OTHER)</li>
+			<li>HSC PERCENTAGE (0 TO 100)</li>
+			<li>HSC BOARD (1 FOR STATE BOARD 0 FOR OTHER)</li>
+			<li>DEGREE PERCENTAGE (0 TO 100)</li>
+			<li>INTERNSHIP (1 FOR YES ,0 FOR NO )</li>
+			<li>EXAM SCORE(0 TO 100)</li>
+			<li>SPECIALISATION YES :1 NO :0</li>
+			<li>MBA PERCENTAGE (0 TO 100)</li>
+			<li>ARTS FIELD 0 FOR NO 1 FOR YES , CHOOSE ONLY ONE AMONG 3</li>
+			<li>COMMERCE FIELD YES :1 NO :0 , CHOOSE ONLY ONE AMONG 3</li>
+			<li>SCIENCE FIELD, CHOOSE ONLY ONE AMONG 3</li>
+			<li>COMMERCE & MANAGEMENT  YES :1 NO :0 , EXTERNAL SPECIALIZATION</li>
+			<li>OTHER DEGREE YES :1 NO :0 , ANY COURCES</li>
+			<li>SCIENCE & TECHNOLOGY YES :1 NO :0</li>
+			
+	  </ul>
+      </div>
+
+      <div class="col">
+        <div class="hide-md-lg">
+        </div>
+
+			<input type="number" name="Gender" placeholder="Gender MALE :1 FEMALE :0" required="required" min="0" max="1"/>
+			<input type="number" name="SSC_P" placeholder="SSC PERCENTAGE" required="required" min="0" max="100"/>
+			<input type="number" name="SSC_B" placeholder="SSC BOARD" required="required" min="0" max="1"/>
+			<input type="number" name="HSC_P" placeholder="HSC PERCENTAGE" required="required" min="1" max="100"/>
+			<input type="number" name="HSC_B" placeholder="HSC BOARD" required="required" min="0" max="1"/>
+			<input type="number" name="DEGREE_P" placeholder="DEGREE PERCENTAGE" required="required" min="1" max="100"/>
+			<input type="number" name="WORK_EX" placeholder="INTERNSHIP  YES:1   NO :0" min="0" max="1"/>
+			<input type="number" name="EXAM_SCORE" placeholder="EXAM SCORE" required="required"  min="1" max="100"/>
+			<input type="number" name="SPECIALISATION" placeholder="SPECIALISATION YES :1 NO :0" required="required"  min="0" max="1"/>
+			<input type="number" name="MBA_PERCENTAGE" placeholder="MBA PERCENTAGE" required="required"  min="0" max="100"/>
+			<input type="number" name="ARTS" placeholder="ARTS FIELD YES :1 NO :0" required="required"  min="0" max="1"/>
+			<input type="number" name="COMMERCE" placeholder="COMMERCE FIELD YES :1 NO :0" required="required"  min="0" max="1"/>
+			<input type="number" name="SCIENCE" placeholder="SCIENCE FIELD YES :1 NO :0" required="required"  min="0" max="1"/>
+			<input type="number" name="COMMERCE_MANAGEMENT" placeholder=" COMMERCE & MANAGEMENT  YES :1 NO :0" required="required"  min="0" max="1"/>			
+			<input type="number" name="OTHER_DEGREE" placeholder="OTHER DEGREE YES :1 NO :0" required="required"  min="0" max="1"/>
+			<input type="number" name="SCIENCE_TECHNOLOGY" placeholder="SCIENCE & TECHNOLOGY YES :1 NO :0" required="required"  min="0" max="1"/>
+			
+			<input type="submit" value="Predict"></input>
+			
+			<h4 style="text-align: center;">{{prediction_text}}</h4>
+      </div>
+      
+    </div>
+  </form>
+  
+</div>
+
+<div class="bottom-container">
+  <div class="row">
+    <marquee><h3>Model Developed and Deployed by: CHINMAY DEOTALE</h3></marquee>
+  </div>
+</div>
+
+</body>
+</html>
